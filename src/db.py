@@ -1,9 +1,10 @@
 import sqlite3
 
+
 class Database:
     def __init__(self) -> None:
         self._connection = sqlite3.connect('finance_tracker.db')
-    
+
     def close(self) -> None:
         self._connection.close()
 
@@ -31,11 +32,11 @@ class Database:
             print('')
 
     def add_expense(
-        self,
-        date: str,
-        category: str,
-        amount: float,
-        description: str
+            self,
+            date: str,
+            category: str,
+            amount: float,
+            description: str
     ) -> None:
         self._connection.execute(
             'INSERT INTO expenses (date, category, amount, description) VALUES (?, ?, ?, ?)',

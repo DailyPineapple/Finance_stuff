@@ -5,7 +5,7 @@ app = typer.Typer()
 
 @app.command()
 def create_tables():
-    db = Database("finance_tracker.db")
+    db = Database()
     db.create_tables()
     db.close()
     typer.echo("Tables created successfully.")
@@ -34,7 +34,7 @@ def add_expense(
 
 @app.command()
 def view_expenses():
-    db = Database("finance_tracker.db")
+    db = Database()
     db.view_expenses()
     db.close()
 

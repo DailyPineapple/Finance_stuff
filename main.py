@@ -1,31 +1,31 @@
 import typer
-from src.db import Database
+from src.db import Database as database
 import datetime as dt
 
 app = typer.Typer()
 
 @app.command()
 def create_tables():
-    db = Database()
+    db = database()
     db.create_tables()
     db.close()
     typer.echo("Tables created successfully.")
 
 @app.command()
 def add_expense(
-    Date: str = dt.datetime.now(),
-    Category: str = typer.Option(..., help="Enter the expense category"),
-    Amount: float = typer.Option(..., help="Enter the amount paid in float format (using a dot)"),
-    Description: str = typer.Option(..., help="Enter the description of the item")
+    date_added: str = dt.datetime.today(),
+    category: str = typer.Option(..., help="Enter the expense category"),
+    amount: float = typer.Option(..., help="Enter the amount paid in float format (using a dot)"),
+    description: str = typer.Option(..., help="Enter the description of the item")
 ):
-    db = Database("finance_tracker.db")
-    db.add_expense(Date, Category, Amount, Description)
+    db = database("finance_tracker.db")
+    db.add_expense(date_added, category, amount, description)
     db.close()
     typer.echo("Expense added successfully.")
 
 @app.command()
 def view_expenses():
-    db = Database("finance_tracker.db")
+    db = database("finance_tracker.db")
     db.view_expenses()
     db.close()
 
